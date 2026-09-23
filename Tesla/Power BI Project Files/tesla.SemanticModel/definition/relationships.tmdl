@@ -1,0 +1,5 @@
+relationship fdd8b6bf-c477-4529-a59c-36e733d86506
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Tesla.Date
+	toColumn: LocalDateTable_26e92340-3c3b-43a3-9bc8-fadc226ddd31.Date
+

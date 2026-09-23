@@ -1,0 +1,21 @@
+model Model
+	culture: en-IN
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-IN
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["Tesla"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Tesla
+ref table DateTableTemplate_81f80398-4ff3-4a4a-b66a-b15d5a6297ed
+ref table LocalDateTable_26e92340-3c3b-43a3-9bc8-fadc226ddd31
+
+ref cultureInfo en-IN
+
