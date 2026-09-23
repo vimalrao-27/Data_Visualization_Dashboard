@@ -1,0 +1,5 @@
+relationship 5e247568-b599-4d04-a5e2-85ed074122b4
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Google.Date
+	toColumn: LocalDateTable_2b771f82-8724-49d5-97f9-925fc851ef04.Date
+

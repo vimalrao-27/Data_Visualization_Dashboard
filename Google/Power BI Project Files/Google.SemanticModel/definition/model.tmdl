@@ -1,0 +1,21 @@
+model Model
+	culture: en-IN
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-IN
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["Google"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Google
+ref table DateTableTemplate_42691b8f-5889-478b-b3e0-877c8e937867
+ref table LocalDateTable_2b771f82-8724-49d5-97f9-925fc851ef04
+
+ref cultureInfo en-IN
+
