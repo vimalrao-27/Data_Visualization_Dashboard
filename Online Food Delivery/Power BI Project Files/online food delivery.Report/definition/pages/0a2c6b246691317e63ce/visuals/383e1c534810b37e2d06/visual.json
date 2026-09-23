@@ -1,0 +1,85 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "383e1c534810b37e2d06",
+  "position": {
+    "x": 1257.5,
+    "y": 2.5000381469726563,
+    "z": 4000,
+    "height": 537.5,
+    "width": 660,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "columnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "online food delivery dataset"
+                    }
+                  },
+                  "Property": "Feedback"
+                }
+              },
+              "queryRef": "online food delivery dataset.Feedback",
+              "nativeQueryRef": "Feedback",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "online food delivery dataset"
+                        }
+                      },
+                      "Property": "Feedback"
+                    }
+                  },
+                  "Function": 5
+                }
+              },
+              "queryRef": "CountNonNull(online food delivery dataset.Feedback)",
+              "nativeQueryRef": "Count of Feedback"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "online food delivery dataset"
+                      }
+                    },
+                    "Property": "Feedback"
+                  }
+                },
+                "Function": 5
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

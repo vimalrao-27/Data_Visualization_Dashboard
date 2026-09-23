@@ -1,0 +1,85 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "6742633188a4cb3be270",
+  "position": {
+    "x": 1258.3042827304487,
+    "y": 540.57115395279209,
+    "z": 0,
+    "height": 540.57115395279209,
+    "width": 660.950444538918,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "pieChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "online food delivery dataset"
+                    }
+                  },
+                  "Property": "Educational Qualifications"
+                }
+              },
+              "queryRef": "online food delivery dataset.Educational Qualifications",
+              "nativeQueryRef": "Educational Qualifications",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "online food delivery dataset"
+                        }
+                      },
+                      "Property": "Educational Qualifications"
+                    }
+                  },
+                  "Function": 5
+                }
+              },
+              "queryRef": "CountNonNull(online food delivery dataset.Educational Qualifications)",
+              "nativeQueryRef": "Count of Educational Qualifications"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "online food delivery dataset"
+                      }
+                    },
+                    "Property": "Educational Qualifications"
+                  }
+                },
+                "Function": 5
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

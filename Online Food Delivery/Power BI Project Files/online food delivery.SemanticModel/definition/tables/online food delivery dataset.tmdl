@@ -1,0 +1,134 @@
+table 'online food delivery dataset'
+	lineageTag: 1766a73e-b925-4035-9186-b53e477943b4
+
+	column Age
+		dataType: int64
+		formatString: 0
+		lineageTag: b79e0d2e-2477-4b9e-a5eb-154b07b1c8e3
+		summarizeBy: sum
+		sourceColumn: Age
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gender
+		dataType: string
+		lineageTag: 093ebfde-68db-4b58-b958-036c1666f749
+		summarizeBy: none
+		sourceColumn: Gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Marital Status'
+		dataType: string
+		lineageTag: a9cce24a-0614-4ed7-91da-02d1db93bd4a
+		summarizeBy: none
+		sourceColumn: Marital Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column Occupation
+		dataType: string
+		lineageTag: 9e51a568-f339-421e-86d9-f7b431c26307
+		summarizeBy: none
+		sourceColumn: Occupation
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Monthly Income'
+		dataType: string
+		lineageTag: 28bb76ae-35bf-4adc-a9f4-d168e7b49415
+		summarizeBy: none
+		sourceColumn: Monthly Income
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Educational Qualifications'
+		dataType: string
+		lineageTag: 419a7c8c-5779-473f-837d-d8c31579cf0e
+		summarizeBy: none
+		sourceColumn: Educational Qualifications
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Family size'
+		dataType: int64
+		formatString: 0
+		lineageTag: 858fc9e1-735f-4b30-973f-382a40d6c2ac
+		summarizeBy: sum
+		sourceColumn: Family size
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Type'
+		dataType: string
+		lineageTag: ad2c9d2d-c517-47c2-9f23-407b4dee5d8e
+		summarizeBy: none
+		sourceColumn: Customer Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column latitude
+		dataType: double
+		lineageTag: aa294b1b-6f72-4dc9-8d7f-311056f42bd0
+		summarizeBy: sum
+		sourceColumn: latitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column longitude
+		dataType: double
+		lineageTag: 2247ee9d-38fb-4adf-b7b0-17dfcad91261
+		summarizeBy: sum
+		sourceColumn: longitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Pin code'
+		dataType: int64
+		formatString: 0
+		lineageTag: acd119e2-b069-401d-bb89-fb991b11b638
+		summarizeBy: sum
+		sourceColumn: Pin code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Output
+		dataType: string
+		lineageTag: 82f89fb3-8547-45c7-8b05-37a0ba3e7b69
+		summarizeBy: none
+		sourceColumn: Output
+
+		annotation SummarizationSetBy = Automatic
+
+	column Feedback
+		dataType: string
+		lineageTag: 0cb7836d-dc58-4143-9806-bc4289faf094
+		summarizeBy: none
+		sourceColumn: Feedback
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column1
+		dataType: string
+		lineageTag: 4a87df2c-7bb0-4de8-b396-f1f27601bc80
+		summarizeBy: none
+		sourceColumn: Column1
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'online food delivery dataset' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\vimal\Downloads\online food delivery dataset.csv"),[Delimiter=",", Columns=14, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Age", Int64.Type}, {"Gender", type text}, {"Marital Status", type text}, {"Occupation", type text}, {"Monthly Income", type text}, {"Educational Qualifications", type text}, {"Family size", Int64.Type}, {"Customer Type", type text}, {"latitude", type number}, {"longitude", type number}, {"Pin code", Int64.Type}, {"Output", type text}, {"Feedback", type text}, {"", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

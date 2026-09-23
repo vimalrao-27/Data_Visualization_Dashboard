@@ -1,0 +1,85 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "8a6281fd80bcc1d8cec7",
+  "position": {
+    "x": 0,
+    "y": 2.5,
+    "z": 2000,
+    "height": 537.5,
+    "width": 637.5,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "columnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "online food delivery dataset"
+                    }
+                  },
+                  "Property": "Gender"
+                }
+              },
+              "queryRef": "online food delivery dataset.Gender",
+              "nativeQueryRef": "Gender",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "online food delivery dataset"
+                        }
+                      },
+                      "Property": "Family size"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(online food delivery dataset.Family size)",
+              "nativeQueryRef": "Sum of Family size"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "online food delivery dataset"
+                      }
+                    },
+                    "Property": "Family size"
+                  }
+                },
+                "Function": 0
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
