@@ -1,0 +1,5 @@
+relationship 87e77aa9-d9fd-4eb3-9ed8-9ba25ef8071f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Apple.Date
+	toColumn: LocalDateTable_1f0acdff-0bcc-4075-a15e-5a6e52a03b43.Date
+

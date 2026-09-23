@@ -1,0 +1,166 @@
+table Apple
+	lineageTag: ad1821f1-514b-4fa4-993a-0a3b2aa23da3
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 3bd7d8ba-2ae6-483f-9884-fe1d45c97ede
+		summarizeBy: none
+		sourceColumn: Date
+
+		variation Variation
+			isDefault
+			relationship: 87e77aa9-d9fd-4eb3-9ed8-9ba25ef8071f
+			defaultHierarchy: LocalDateTable_1f0acdff-0bcc-4075-a15e-5a6e52a03b43.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Open
+		dataType: double
+		lineageTag: 4a9ec000-a326-46cb-a740-5ed5b0ef03e7
+		summarizeBy: sum
+		sourceColumn: Open
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column High
+		dataType: double
+		lineageTag: a29da0e0-5cfe-43fa-881f-ecf9069d2c4e
+		summarizeBy: sum
+		sourceColumn: High
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Low
+		dataType: double
+		lineageTag: c66a5073-3bb8-4a1c-a3ac-cdd52c1cae48
+		summarizeBy: sum
+		sourceColumn: Low
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Close
+		dataType: double
+		lineageTag: 9d80d86c-3917-4c61-8218-c41b14aeab09
+		summarizeBy: sum
+		sourceColumn: Close
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Adj Close'
+		dataType: double
+		lineageTag: 85f2660e-89b1-4e01-a8dc-26054a0c2711
+		summarizeBy: sum
+		sourceColumn: Adj Close
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Volume
+		dataType: int64
+		formatString: 0
+		lineageTag: d7a9fd6c-babe-467c-b1a9-4ba950a6550b
+		summarizeBy: sum
+		sourceColumn: Volume
+
+		annotation SummarizationSetBy = Automatic
+
+	column MA50
+		dataType: double
+		lineageTag: b9d0ef18-3363-493c-8a96-5df76afc5b4e
+		summarizeBy: sum
+		sourceColumn: MA50
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MA200
+		dataType: string
+		lineageTag: d2f9d218-266e-47e6-8414-5f5100dc8e3d
+		summarizeBy: none
+		sourceColumn: MA200
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Previous Days Close'
+		dataType: double
+		lineageTag: a1601373-9069-4912-b257-b92304ef2684
+		summarizeBy: sum
+		sourceColumn: Previous Days Close
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Change in Price'
+		dataType: double
+		lineageTag: 42497378-4915-40a4-bb6c-404fc4377ab5
+		summarizeBy: sum
+		sourceColumn: Change in Price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column '% Change in Price'
+		dataType: double
+		lineageTag: 17dac07d-a0fb-4804-b2bf-34cfca70a051
+		summarizeBy: sum
+		sourceColumn: % Change in Price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Previous Days Volume'
+		dataType: int64
+		formatString: 0
+		lineageTag: d1a7888e-2e2e-4cbe-ab7c-3d0a46b2b829
+		summarizeBy: sum
+		sourceColumn: Previous Days Volume
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Change in Volume'
+		dataType: int64
+		formatString: 0
+		lineageTag: a266c9cb-b8c3-453d-aaea-24d7b12a5694
+		summarizeBy: sum
+		sourceColumn: Change in Volume
+
+		annotation SummarizationSetBy = Automatic
+
+	column '% Change in Volume'
+		dataType: double
+		lineageTag: 807e61b4-d3af-414b-a771-6808d6ca584f
+		summarizeBy: sum
+		sourceColumn: % Change in Volume
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Apple = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\vimal\Downloads\Apple.csv"),[Delimiter=",", Columns=15, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Date", type date}, {"Open", type number}, {"High", type number}, {"Low", type number}, {"Close", type number}, {"Adj Close", type number}, {"Volume", Int64.Type}, {"MA50", type number}, {"MA200", type text}, {"Previous Days Close", type number}, {"Change in Price", type number}, {"% Change in Price", type number}, {"Previous Days Volume", Int64.Type}, {"Change in Volume", Int64.Type}, {"% Change in Volume", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
