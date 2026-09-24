@@ -1,0 +1,74 @@
+table calendar
+	lineageTag: 9ac00a3c-72ea-4ebf-a3f9-b6756192ae51
+
+	column cal_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b64744c1-4ce6-45ea-8ec0-f50c7295a049
+		summarizeBy: none
+		sourceColumn: cal_date
+
+		variation Variation
+			isDefault
+			relationship: 5e533ce6-d9eb-4819-8e64-e3b850b15f36
+			defaultHierarchy: LocalDateTable_4f50189c-bce8-457d-af92-ab8064edaf97.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Month_num
+		dataType: int64
+		formatString: 0
+		lineageTag: 70c11f57-4f7c-4eff-bcf6-16ae1b6d8849
+		summarizeBy: sum
+		sourceColumn: Month_num
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_name
+		dataType: string
+		lineageTag: ae7696d8-1b11-4f81-bd6d-b73a47dff2d3
+		summarizeBy: none
+		sourceColumn: month_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column year
+		dataType: int64
+		formatString: 0
+		lineageTag: 0cca9576-2083-4c10-861a-4e57104a5838
+		summarizeBy: sum
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	column weekday_num
+		dataType: int64
+		formatString: 0
+		lineageTag: a4a3a3f0-fcc0-4bd5-88e6-c7ee168174ff
+		summarizeBy: sum
+		sourceColumn: weekday_num
+
+		annotation SummarizationSetBy = Automatic
+
+	column weekday_name
+		dataType: string
+		lineageTag: a6cedad9-eff3-40d3-90dc-500e7f599c08
+		summarizeBy: none
+		sourceColumn: weekday_name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition calendar = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\vimal\OneDrive\Desktop\Data Visualization\sample-chocolate-shipments-data-all-Apr-2025.xlsx"), null, true),
+				    calendar_Table = Source{[Item="calendar",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(calendar_Table,{{"cal_date", type date}, {"Month_num", Int64.Type}, {"month_name", type text}, {"year", Int64.Type}, {"weekday_num", Int64.Type}, {"weekday_name", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

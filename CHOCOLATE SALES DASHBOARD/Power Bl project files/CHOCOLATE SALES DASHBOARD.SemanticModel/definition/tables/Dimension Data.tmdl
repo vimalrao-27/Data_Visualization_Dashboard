@@ -1,0 +1,138 @@
+table 'Dimension Data'
+	lineageTag: a1b8eb14-68c1-4de6-aaeb-7e548d0735f6
+
+	column Product
+		dataType: string
+		lineageTag: 2cb4074e-ad3e-4d84-b2c5-a17928cf53a0
+		summarizeBy: none
+		sourceColumn: Product
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		lineageTag: 8477a049-0636-46d8-94fa-612c1cd9a01e
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cost_per_box
+		dataType: double
+		lineageTag: 215e5368-ce8b-4e7f-b90a-0f2a198c15db
+		summarizeBy: sum
+		sourceColumn: Cost_per_box
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PID
+		dataType: string
+		lineageTag: 640055b8-288d-4556-b952-eb2c4c59428a
+		summarizeBy: none
+		sourceColumn: PID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column5
+		dataType: string
+		lineageTag: 391f0c89-9208-4eaf-a692-4ef1b173512a
+		summarizeBy: none
+		sourceColumn: Column5
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column6
+		dataType: string
+		lineageTag: c52f180f-5cb8-4e1b-b253-2f2f7b3971a5
+		summarizeBy: none
+		sourceColumn: Column6
+
+		annotation SummarizationSetBy = Automatic
+
+	column Geo
+		dataType: string
+		lineageTag: 2a0b1b77-8e99-4206-928c-451b2d2f6201
+		summarizeBy: none
+		sourceColumn: Geo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		lineageTag: b1a09abd-6d0a-42dc-8940-dcf6dadbf910
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column GID
+		dataType: string
+		lineageTag: 4021d788-f0af-483d-a9e8-6dad7524a67c
+		summarizeBy: none
+		sourceColumn: GID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column10
+		dataType: string
+		lineageTag: 3a45a77a-a911-496d-b32e-8040b2ca2b4b
+		summarizeBy: none
+		sourceColumn: Column10
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column11
+		dataType: string
+		lineageTag: 843e880f-bac5-4d29-b469-0c9b3e21d35e
+		summarizeBy: none
+		sourceColumn: Column11
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sales_person
+		dataType: string
+		lineageTag: 9265fce1-42ff-4569-9f56-c5c6eefa73f9
+		summarizeBy: none
+		sourceColumn: Sales_person
+
+		annotation SummarizationSetBy = Automatic
+
+	column Team
+		dataType: string
+		lineageTag: 7d963327-b023-44da-999b-5c1e514657fe
+		summarizeBy: none
+		sourceColumn: Team
+
+		annotation SummarizationSetBy = Automatic
+
+	column Picture
+		dataType: string
+		lineageTag: ae4b6d2a-62a8-4865-9d07-631c73dcd8f6
+		summarizeBy: none
+		sourceColumn: Picture
+
+		annotation SummarizationSetBy = Automatic
+
+	column SPID
+		dataType: string
+		lineageTag: df167520-28a3-4168-932e-fe426fde36fe
+		summarizeBy: none
+		sourceColumn: SPID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Dimension Data' = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\vimal\OneDrive\Desktop\Data Visualization\sample-chocolate-shipments-data-all-Apr-2025.xlsx"), null, true),
+				    #"Dimension Data_Sheet" = Source{[Item="Dimension Data",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Dimension Data_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Product", type text}, {"Category", type text}, {"Cost_per_box", type number}, {"PID", type text}, {"Column5", type any}, {"Column6", type any}, {"Geo", type text}, {"Region", type text}, {"GID", type text}, {"Column10", type any}, {"Column11", type any}, {"Sales_person", type text}, {"Team", type text}, {"Picture", type text}, {"SPID", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

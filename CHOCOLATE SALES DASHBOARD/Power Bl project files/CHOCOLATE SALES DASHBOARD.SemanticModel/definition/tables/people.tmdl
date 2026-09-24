@@ -1,0 +1,47 @@
+table people
+	lineageTag: 1ef3625c-2a13-40f1-aa64-be3cdecf61c1
+
+	column Sales_person
+		dataType: string
+		lineageTag: 888e988e-585c-45e9-b624-d647f22d2c84
+		summarizeBy: none
+		sourceColumn: Sales_person
+
+		annotation SummarizationSetBy = Automatic
+
+	column Team
+		dataType: string
+		lineageTag: 1b4d9f94-aef5-4656-b489-8243d369d325
+		summarizeBy: none
+		sourceColumn: Team
+
+		annotation SummarizationSetBy = Automatic
+
+	column Picture
+		dataType: string
+		lineageTag: 0f1a4887-a0a6-4662-bd25-d7a37e5df5e8
+		summarizeBy: none
+		sourceColumn: Picture
+
+		annotation SummarizationSetBy = Automatic
+
+	column SPID
+		dataType: string
+		lineageTag: c38fcb86-6d9c-4c3c-baf2-aab5c3d478b5
+		summarizeBy: none
+		sourceColumn: SPID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition people = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\vimal\OneDrive\Desktop\Data Visualization\sample-chocolate-shipments-data-all-Apr-2025.xlsx"), null, true),
+				    people_Table = Source{[Item="people",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(people_Table,{{"Sales_person", type text}, {"Team", type text}, {"Picture", type text}, {"SPID", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

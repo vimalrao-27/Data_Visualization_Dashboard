@@ -1,0 +1,49 @@
+table products
+	lineageTag: 9fb2dcb8-22fc-4769-b183-c841818ba04e
+
+	column Product
+		dataType: string
+		lineageTag: b3eb3cc9-fd21-4bed-acc9-40801cbbc973
+		summarizeBy: none
+		sourceColumn: Product
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		lineageTag: 4e76a534-f27f-4f65-80b5-e2f6cb4c77f6
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cost_per_box
+		dataType: double
+		lineageTag: 1de42c1a-5451-4a9a-85fc-59e5ec8248e8
+		summarizeBy: sum
+		sourceColumn: Cost_per_box
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PID
+		dataType: string
+		lineageTag: 5cb6b3c2-61d5-439d-b95f-08d05ba28ad5
+		summarizeBy: none
+		sourceColumn: PID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition products = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\vimal\OneDrive\Desktop\Data Visualization\sample-chocolate-shipments-data-all-Apr-2025.xlsx"), null, true),
+				    products_Table = Source{[Item="products",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(products_Table,{{"Product", type text}, {"Category", type text}, {"Cost_per_box", type number}, {"PID", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

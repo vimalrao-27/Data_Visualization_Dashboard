@@ -1,0 +1,54 @@
+relationship 5e533ce6-d9eb-4819-8e64-e3b850b15f36
+	joinOnDateBehavior: datePartOnly
+	fromColumn: calendar.cal_date
+	toColumn: LocalDateTable_4f50189c-bce8-457d-af92-ab8064edaf97.Date
+
+relationship AutoDetected_de1fae3f-f181-47c8-8418-2ac2e648f512
+	fromColumn: 'Dimension Data'.Geo
+	toColumn: locations.Geo
+
+relationship AutoDetected_f67139c8-1c4e-444e-a693-dc61dc09f372
+	fromColumn: shipments.GID
+	toColumn: locations.GID
+
+relationship AutoDetected_b3c92cd5-b19d-4091-a745-b9f2d44345ce
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: 'Dimension Data'.Sales_person
+	toColumn: people.Sales_person
+
+relationship AutoDetected_646d027e-ff1a-4dbf-a6e2-a5873ab0f44f
+	isActive: false
+	fromColumn: shipments.SPID
+	toColumn: people.SPID
+
+relationship AutoDetected_8c1f04e5-3d6d-4b64-86ca-85ca279a9e8f
+	isActive: false
+	fromColumn: shipments.SPID
+	toColumn: 'Dimension Data'.SPID
+
+relationship AutoDetected_b60db670-a75d-4ab9-b14f-1c979811be62
+	fromColumn: 'Dimension Data'.Product
+	toColumn: products.Product
+
+relationship AutoDetected_05500b01-7d3e-40e8-9eb2-7d7bb643a829
+	fromColumn: shipments.PID
+	toColumn: products.PID
+
+relationship 90d727b3-b71a-ad8c-778b-5d7d9546d3f3
+	fromColumn: shipments.Shipdate
+	toColumn: calendar.cal_date
+
+relationship a0c1e3ac-9aef-e1b5-1111-e65b757db7f2
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: 'Dimension Data'.PID
+	toColumn: shipments.PID
+
+relationship 4d27311f-4e49-82b1-6126-73f659d756ef
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: 'Dimension Data'.GID
+	toColumn: shipments.GID
+

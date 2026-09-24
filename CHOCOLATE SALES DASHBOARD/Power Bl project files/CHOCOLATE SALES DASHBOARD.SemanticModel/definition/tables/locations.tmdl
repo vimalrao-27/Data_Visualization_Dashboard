@@ -1,0 +1,39 @@
+table locations
+	lineageTag: 327e7332-e05c-4fdf-bf0f-92526e289255
+
+	column Geo
+		dataType: string
+		lineageTag: a31e8a74-d800-4b53-9313-552f9589ce52
+		summarizeBy: none
+		sourceColumn: Geo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		lineageTag: f5e2d8fd-a034-40aa-b59b-9fed9d54ea9c
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column GID
+		dataType: string
+		lineageTag: 6a96a772-5293-4491-bd0e-95591d331157
+		summarizeBy: none
+		sourceColumn: GID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition locations = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\vimal\OneDrive\Desktop\Data Visualization\sample-chocolate-shipments-data-all-Apr-2025.xlsx"), null, true),
+				    locations_Table = Source{[Item="locations",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(locations_Table,{{"Geo", type text}, {"Region", type text}, {"GID", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

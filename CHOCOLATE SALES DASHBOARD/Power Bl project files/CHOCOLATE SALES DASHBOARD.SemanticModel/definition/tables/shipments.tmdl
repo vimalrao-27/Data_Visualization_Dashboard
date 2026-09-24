@@ -1,0 +1,163 @@
+table shipments
+	lineageTag: 850d1984-d129-45c2-a91b-3a5312c1713e
+
+	measure 'Total Boxes' =
+			
+			SUM(Shipments[Boxes])
+		lineageTag: a426081f-2422-43bb-bab5-68c7fe48dfbc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Sales' =
+			
+			SUM(Shipments[Amount])
+		lineageTag: d5599daa-3cb5-4a33-8a48-ffe15b37a330
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Shipments' =
+			
+			DISTINCTCOUNT(Shipments[ShipmentID])
+		formatString: 0
+		lineageTag: 39cb5eb9-867e-4aa0-9d25-ad4618bce5cf
+
+	measure 'Delivered Shipments' =
+			
+			CALCULATE(
+			    [Total Shipments],
+			    Shipments[Order_Status] = "Delivered"
+			)
+		formatString: 0
+		lineageTag: ce900813-a56a-4f96-b4c3-8d6491000637
+
+	measure 'Delivered Rate' =
+			
+			DIVIDE(
+			    [Delivered Shipments],
+			    [Total Shipments]
+			)
+		lineageTag: b03ec345-f298-4e7c-9ee4-8159e0cc34ad
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Cancelled Shipments' =
+			
+			CALCULATE(
+			    [Total Shipments],
+			    Shipments[Order_Status] = "Cancelled"
+			)
+		formatString: 0
+		lineageTag: bdf96ffb-e2b5-42a0-b840-19905b7430e7
+
+	measure 'Cancelled Rate' =
+			
+			DIVIDE(
+			    [Cancelled Shipments],
+			    [Total Shipments]
+			)
+		lineageTag: abe6ff43-afe1-44ff-b5d9-647ab775680d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Average Shipment Value' =
+			
+			DIVIDE(
+			    [Total Sales],
+			    [Total Shipments]
+			)
+		lineageTag: b22f8cb6-5cd8-4289-96f3-0981dd80b873
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Sales per Box' =
+			
+			DIVIDE(
+			    [Total Sales],
+			    [Total Boxes]
+			)
+		lineageTag: e8ce35ba-bc5f-4487-9054-deaab3893f48
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ShipmentID
+		dataType: string
+		lineageTag: d23b8132-4f0c-49c7-a8ba-379adc846b0f
+		summarizeBy: none
+		sourceColumn: ShipmentID
+
+		annotation SummarizationSetBy = Automatic
+
+	column SPID
+		dataType: string
+		lineageTag: 5d821a09-8d43-4141-9434-3796c0eb4cd5
+		summarizeBy: none
+		sourceColumn: SPID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PID
+		dataType: string
+		lineageTag: 59671db0-3ee5-4801-b75d-bcad9eaa5502
+		summarizeBy: none
+		sourceColumn: PID
+
+		annotation SummarizationSetBy = Automatic
+
+	column GID
+		dataType: string
+		lineageTag: ee904f1f-ab2b-414e-a2e7-2643bd0ed7ec
+		summarizeBy: none
+		sourceColumn: GID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Shipdate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 4895d5df-3905-497d-acb1-1e772e6c494c
+		summarizeBy: none
+		sourceColumn: Shipdate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Amount
+		dataType: double
+		lineageTag: 53c7a548-f6a0-422c-8fa4-d2d1c5db3e3b
+		summarizeBy: sum
+		sourceColumn: Amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Boxes
+		dataType: int64
+		formatString: 0
+		lineageTag: 4541edaa-fe31-437e-bede-08ce4b9bf7de
+		summarizeBy: sum
+		sourceColumn: Boxes
+
+		annotation SummarizationSetBy = Automatic
+
+	column Order_Status
+		dataType: string
+		lineageTag: acba8338-f544-4bab-870a-fd24a7a2f3d5
+		summarizeBy: none
+		sourceColumn: Order_Status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition shipments = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\vimal\OneDrive\Desktop\Data Visualization\sample-chocolate-shipments-data-all-Apr-2025.xlsx"), null, true),
+				    shipments_Table = Source{[Item="shipments",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(shipments_Table,{{"ShipmentID", type text}, {"SPID", type text}, {"PID", type text}, {"GID", type text}, {"Shipdate", type date}, {"Amount", type number}, {"Boxes", Int64.Type}, {"Order_Status", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
