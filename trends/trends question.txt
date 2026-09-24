@@ -1,0 +1,7 @@
+Task: Initial Data Analysis Using Jupyter Notebook
+Perform the initial analysis of the given dataset using a Jupyter Notebook and Python Pandas. Load the dataset and inspect its basic structure using functions such as head(), tail(), shape, info(), describe(), columns, dtypes, isnull().sum(), duplicated().sum(), and nunique(). Analyze the number of rows and columns, column names, data types, missing values, duplicate records, unique values, and basic statistical measures such as mean, median, minimum, maximum, and standard deviation. After executing each function, explain the output obtained and identify any unusual values, missing data, duplicates, or columns that may require further cleaning. The final notebook should contain the Python code, corresponding outputs, and a brief overall interpretation of the dataset.
+
+
+
+Expected Output: A Jupyter Notebook containing the initial data analysis, outputs, and clear explanations of the findings.
+
