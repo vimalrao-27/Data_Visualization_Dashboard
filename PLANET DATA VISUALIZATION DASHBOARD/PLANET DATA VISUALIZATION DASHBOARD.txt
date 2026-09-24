@@ -1,0 +1,23 @@
+Data Visualization and Dashboard Creation Using Excel
+
+As a continuation of the Data Cleaning task, students are required to use the cleaned dataset to develop a mini project on Data Visualization and Dashboard Creation using Microsoft Excel.
+
+Tasks to be Completed:
+
+Create a bar chart showing the number of planets by planet status.
+Create a column chart showing the top 10 planets by mass.
+Create a scatter plot showing the relationship between planet mass and radius.
+Identify the planet with the highest mass.
+Identify the planet with the lowest mass.
+Calculate the average mass of the planets.
+Calculate the average radius of the planets.
+Create a Bar Chart representing the number of planets by planet status.
+Create a Column Chart showing the Top 10 planets by mass.
+Create a Scatter Plot showing the relationship between planet mass and radius.
+Dashboard Requirements:
+
+Use appropriate charts and visualizations.
+Provide meaningful chart titles and axis labels.
+Maintain proper formatting and alignment.
+Present key findings clearly through the dashboard.
+Ensure the dashboard is clean, professional, and easy to interpret.
